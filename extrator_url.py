@@ -5,10 +5,13 @@ class ExtratorURL :
         self.valida_url(url)
 
     def sanitiza_url(self, url) :
-        return url.strip()
+        if type(url) == str :
+            return url.strip()
+        else :
+            return ""
     
     def valida_url(self, url) :
-        if self.url == "" :
+        if not self.url :
             raise ValueError("A Url está vazia")
         
     def get_url_base(self) :
@@ -32,10 +35,8 @@ class ExtratorURL :
         return valor
         
 
-
 extrator_url = ExtratorURL("https://bytebank.com/cambio?quantidade=100&moedaOrigem=real&moedaDestino=dolar")
 
 valor_quantidade = extrator_url.get_valor_parametro("quantidade")
 
 print(valor_quantidade)
-
