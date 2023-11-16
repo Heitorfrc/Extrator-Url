@@ -39,9 +39,32 @@ class ExtratorURL :
         else :
             valor = self.get_url_parametros()[indice_valor:indice_e_comercial]
         return valor
+    
+    def __len__(self) :
+        return len(self.url)
+    
+    def __str__(self) :
+        return self.url + "\n" + "Url Base: " + self.get_url_base() + "\n" + "Parâmetros: " + self.get_url_parametros()
+    
+    def __eq__(self, outro) :
+        return self.url == outro.url
+    
         
 url = "https://bytebank.com/cambio?quantidade=100&moedaOrigem=real&moedaDestino=dolar"
 
 extrator_url = ExtratorURL(url)
-valor_quantidade = extrator_url.get_valor_parametro("quantidade")
-print(valor_quantidade)
+print("O tamanho da URL: ", len(extrator_url))
+print(extrator_url)
+
+parametro = "quantidade"
+valor_parametro = extrator_url.get_valor_parametro(parametro)
+float_valor_quantidade = float(extrator_url.get_valor_parametro("quantidade"))
+print("O Parâmetro " + parametro + " é " + valor_parametro)
+
+conversao_dolar_real = float(5.5)
+print("O valor em dólar é: ", float_valor_quantidade*conversao_dolar_real)
+
+# aprendendo sobre equidade e endereço de memoria
+extrator_url_2 = ExtratorURL(url)
+print(extrator_url == extrator_url_2)
+print(extrator_url is extrator_url_2)
